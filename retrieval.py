@@ -1,16 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# # Retrieval
-# 
-# Retrieval is the centerpiece of our retrieval augmented generation (RAG) flow. 
-# 
-# Let's get our vectorDB from before.
-
-# ## Vectorstore retrieval
-# 
-
-# In[ ]:
 
 
 import os
@@ -27,7 +15,7 @@ openai.api_key  = os.environ['OPENAI_API_KEY']
 # In[ ]:
 
 
-#!pip install lark
+
 
 
 # ### Similarity Search
@@ -92,9 +80,6 @@ smalldb.max_marginal_relevance_search(question,k=2, fetch_k=3)
 
 # ### Addressing Diversity: Maximum marginal relevance
 # 
-# Last class we introduced one problem: how to enforce diversity in the search results.
-#  
-# `Maximum marginal relevance` strives to achieve both relevance to the query *and diversity* among the results.
 
 # In[ ]:
 
@@ -137,11 +122,7 @@ docs_mmr[1].page_content[:100]
 
 # ### Addressing Specificity: working with metadata
 # 
-# In last lecture, we showed that a question about the third lecture can include results from other lectures as well.
-# 
-# To address this, many vectorstores support operations on `metadata`.
-# 
-# `metadata` provides context for each embedded chunk.
+
 
 # In[ ]:
 
@@ -174,14 +155,6 @@ for d in docs:
 
 # ### Addressing Specificity: working with metadata using self-query retriever
 # 
-# But we have an interesting challenge: we often want to infer the metadata from the query itself.
-# 
-# To address this, we can use `SelfQueryRetriever`, which uses an LLM to extract:
-#  
-# 1. The `query` string to use for vector search
-# 2. A metadata filter to pass in as well
-# 
-# Most vector databases support metadata filters, so this doesn't require any new databases or indexes.
 
 # In[ ]:
 
@@ -230,7 +203,7 @@ retriever = SelfQueryRetriever.from_llm(
 question = "what did they say about regression in the third lecture?"
 
 
-# **You will receive a warning** about predict_and_parse being deprecated the first time you executing the next line. This can be safely ignored.
+
 
 # In[ ]:
 
@@ -247,13 +220,7 @@ for d in docs:
 
 # ### Additional tricks: compression
 # 
-# Another approach for improving the quality of retrieved docs is compression.
 # 
-# Information most relevant to a query may be buried in a document with a lot of irrelevant text. 
-# 
-# Passing that full document through your application can lead to more expensive LLM calls and poorer responses.
-# 
-# Contextual compression is meant to fix this. 
 
 # In[ ]:
 
@@ -315,9 +282,6 @@ pretty_print_docs(compressed_docs)
 
 # ## Other types of retrieval
 # 
-# It's worth noting that vectordb as not the only kind of tool to retrieve documents. 
-# 
-# The `LangChain` retriever abstraction includes other ways to retrieve documents, such as TF-IDF or SVM.
 
 # In[ ]:
 
