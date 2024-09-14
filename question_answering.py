@@ -1,17 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Question Answering
-
-# ## Overview
-# 
-# Recall the overall workflow for retrieval augmented generation (RAG):
-
-# ![overview.jpeg](attachment:overview.jpeg)
-
-# We discussed `Document Loading` and `Splitting` as well as `Storage` and `Retrieval`.
-# 
-# Let's load our vectorDB. 
 
 # In[ ]:
 
@@ -27,10 +13,7 @@ _ = load_dotenv(find_dotenv()) # read local .env file
 openai.api_key  = os.environ['OPENAI_API_KEY']
 
 
-# The code below was added to assign the openai LLM version filmed until it is deprecated, currently in Sept 2023. 
-# LLM responses can often vary, but the responses may be significantly different when using a different model version.
 
-# In[ ]:
 
 
 import datetime
@@ -188,11 +171,6 @@ result["result"]
 # In[ ]:
 
 
-#import os
-#os.environ["LANGCHAIN_TRACING_V2"] = "true"
-#os.environ["LANGCHAIN_ENDPOINT"] = "https://api.langchain.plus"
-#os.environ["LANGCHAIN_API_KEY"] = "..." # replace dots with your api key
-
 
 # In[ ]:
 
@@ -216,11 +194,6 @@ qa_chain_mr = RetrievalQA.from_chain_type(
 )
 result = qa_chain_mr({"query": question})
 result["result"]
-
-
-# ### RetrievalQA limitations
-#  
-# QA fails to preserve conversational history.
 
 # In[ ]:
 
@@ -246,10 +219,6 @@ question = "why are those prerequesites needed?"
 result = qa_chain({"query": question})
 result["result"]
 
-
-# Note, The LLM response varies. Some responses **do** include a reference to probability which might be gleaned from referenced documents. The point is simply that the model does not have access to past questions or answers, this will be covered in the next section.
-
-# In[ ]:
 
 
 
