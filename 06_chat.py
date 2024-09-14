@@ -1,15 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Chat
-# 
-# Recall the overall workflow for retrieval augmented generation (RAG):
-
-# ![overview.jpeg](attachment:overview.jpeg)
-
-# We discussed `Document Loading` and `Splitting` as well as `Storage` and `Retrieval`.
-# 
-# We then showed how `Retrieval` can be used for output generation in Q+A using `RetrievalQA` chain.
 
 # In[ ]:
 
@@ -28,9 +16,6 @@ _ = load_dotenv(find_dotenv()) # read local .env file
 openai.api_key  = os.environ['OPENAI_API_KEY']
 
 
-# The code below was added to assign the openai LLM version filmed until it is deprecated, currently in Sept 2023. 
-# LLM responses can often vary, but the responses may be significantly different when using a different model version.
-
 # In[ ]:
 
 
@@ -43,19 +28,11 @@ else:
 print(llm_name)
 
 
-#  If you wish to experiment on the `LangSmith platform` (previously known as LangChain Plus):
-# 
-#  * Go to [LangSmith](https://www.langchain.com/langsmith) and sign up
-#  * Create an api key from your account's settings
-#  * Use this api key in the code below 
+ 
 
 # In[ ]:
 
 
-#import os
-#os.environ["LANGCHAIN_TRACING_V2"] = "true"
-#os.environ["LANGCHAIN_ENDPOINT"] = "https://api.langchain.plus"
-#os.environ["LANGCHAIN_API_KEY"] = "..."
 
 
 # In[ ]:
@@ -331,8 +308,7 @@ dashboard = pn.Column(
 dashboard
 
 
-# Feel free to copy this code and modify it to add your own features. You can try alternate memory and retriever models by changing the configuration in `load_db` function and the `convchain` method. [Panel](https://panel.holoviz.org/) and [Param](https://param.holoviz.org/) have many useful features and widgets you can use to extend the GUI.
-# 
+#
 
 # ## Acknowledgments
 # 
