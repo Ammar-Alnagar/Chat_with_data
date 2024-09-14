@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Vectorstores and Embeddings
-# 
-# Recall the overall workflow for retrieval augmented generation (RAG):
-
-# ![overview.jpeg](attachment:overview.jpeg)
-
-# In[ ]:
 
 
 import os
@@ -21,9 +11,7 @@ _ = load_dotenv(find_dotenv()) # read local .env file
 openai.api_key  = os.environ['OPENAI_API_KEY']
 
 
-# We just discussed `Document Loading` and `Splitting`.
 
-# In[ ]:
 
 
 from langchain.document_loaders import PyPDFLoader
@@ -66,7 +54,7 @@ len(splits)
 
 # ## Embeddings
 # 
-# Let's take our splits and embed them.
+
 
 # In[ ]:
 
@@ -191,13 +179,7 @@ docs[0].page_content
 vectordb.persist()
 
 
-# ## Failure modes
-# 
-# This seems great, and basic similarity search will get you 80% of the way there very easily. 
-# 
-# But there are some failure modes that can creep up. 
-# 
-# Here are some edge cases that can arise - we'll fix them in the next class.
+
 
 # In[ ]:
 
@@ -211,11 +193,7 @@ question = "what did they say about matlab?"
 docs = vectordb.similarity_search(question,k=5)
 
 
-# Notice that we're getting duplicate chunks (because of the duplicate `MachineLearning-Lecture01.pdf` in the index).
-# 
-# Semantic search fetches all similar documents, but does not enforce diversity.
-# 
-# `docs[0]` and `docs[1]` are indentical.
+
 
 # In[ ]:
 
@@ -229,9 +207,6 @@ docs[0]
 docs[1]
 
 
-# We can see a new failure mode.
-# 
-# The question below asks a question about the third lecture, but includes results from other lectures as well.
 
 # In[ ]:
 
@@ -258,7 +233,7 @@ for doc in docs:
 print(docs[4].page_content)
 
 
-# Approaches discussed in the next lecture can be used to address both!
+
 
 # In[ ]:
 
