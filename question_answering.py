@@ -1,7 +1,4 @@
 
-# In[ ]:
-
-
 import os
 import openai
 import sys
@@ -12,10 +9,6 @@ _ = load_dotenv(find_dotenv()) # read local .env file
 
 openai.api_key  = os.environ['OPENAI_API_KEY']
 
-
-
-
-
 import datetime
 current_date = datetime.datetime.now().date()
 if current_date < datetime.date(2023, 9, 2):
@@ -23,10 +16,6 @@ if current_date < datetime.date(2023, 9, 2):
 else:
     llm_name = "gpt-3.5-turbo"
 print(llm_name)
-
-
-# In[ ]:
-
 
 from langchain.vectorstores import Chroma
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -48,47 +37,19 @@ question = "What are major topics for this class?"
 docs = vectordb.similarity_search(question,k=3)
 len(docs)
 
-
-# In[ ]:
-
-
 from langchain.chat_models import ChatOpenAI
 llm = ChatOpenAI(model_name=llm_name, temperature=0)
 
-
-# ### RetrievalQA chain
-
-# In[ ]:
-
-
 from langchain.chains import RetrievalQA
-
-
-# In[ ]:
-
 
 qa_chain = RetrievalQA.from_chain_type(
     llm,
     retriever=vectordb.as_retriever()
 )
 
-
-# In[ ]:
-
-
 result = qa_chain({"query": question})
 
-
-# In[ ]:
-
-
 result["result"]
-
-
-# ### Prompt
-
-# In[ ]:
-
 
 from langchain.prompts import PromptTemplate
 
@@ -112,33 +73,16 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 
-# In[ ]:
-
-
 question = "Is probability a class topic?"
-
-
-# In[ ]:
 
 
 result = qa_chain({"query": question})
 
 
-# In[ ]:
-
-
 result["result"]
 
 
-# In[ ]:
-
-
 result["source_documents"][0]
-
-
-# ### RetrievalQA chain types
-
-# In[ ]:
 
 
 qa_chain_mr = RetrievalQA.from_chain_type(
@@ -146,10 +90,6 @@ qa_chain_mr = RetrievalQA.from_chain_type(
     retriever=vectordb.as_retriever(),
     chain_type="map_reduce"
 )
-
-
-# In[ ]:
-
 
 result = qa_chain_mr({"query": question})
 
@@ -184,9 +124,6 @@ result = qa_chain_mr({"query": question})
 result["result"]
 
 
-# In[ ]:
-
-
 qa_chain_mr = RetrievalQA.from_chain_type(
     llm,
     retriever=vectordb.as_retriever(),
@@ -195,24 +132,17 @@ qa_chain_mr = RetrievalQA.from_chain_type(
 result = qa_chain_mr({"query": question})
 result["result"]
 
-# In[ ]:
-
-
 qa_chain = RetrievalQA.from_chain_type(
     llm,
     retriever=vectordb.as_retriever()
 )
 
 
-# In[ ]:
-
 
 question = "Is probability a class topic?"
 result = qa_chain({"query": question})
 result["result"]
 
-
-# In[ ]:
 
 
 question = "why are those prerequesites needed?"
