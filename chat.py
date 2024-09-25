@@ -1,5 +1,5 @@
 
-# In[ ]:
+
 
 
 import os
@@ -16,7 +16,7 @@ _ = load_dotenv(find_dotenv()) # read local .env file
 openai.api_key  = os.environ['OPENAI_API_KEY']
 
 
-# In[ ]:
+
 
 
 import datetime
@@ -30,12 +30,12 @@ print(llm_name)
 
  
 
-# In[ ]:
 
 
 
 
-# In[ ]:
+
+
 
 
 from langchain.vectorstores import Chroma
@@ -45,7 +45,7 @@ embedding = OpenAIEmbeddings()
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 
 
-# In[ ]:
+
 
 
 question = "What are major topics for this class?"
@@ -53,7 +53,7 @@ docs = vectordb.similarity_search(question,k=3)
 len(docs)
 
 
-# In[ ]:
+
 
 
 from langchain.chat_models import ChatOpenAI
@@ -61,7 +61,7 @@ llm = ChatOpenAI(model_name=llm_name, temperature=0)
 llm.predict("Hello world!")
 
 
-# In[ ]:
+
 
 
 # Build prompt
@@ -87,7 +87,7 @@ result["result"]
 
 # ### Memory
 
-# In[ ]:
+
 
 
 from langchain.memory import ConversationBufferMemory
@@ -99,7 +99,7 @@ memory = ConversationBufferMemory(
 
 # ### ConversationalRetrievalChain
 
-# In[ ]:
+
 
 
 from langchain.chains import ConversationalRetrievalChain
@@ -111,27 +111,27 @@ qa = ConversationalRetrievalChain.from_llm(
 )
 
 
-# In[ ]:
+
 
 
 question = "Is probability a class topic?"
 result = qa({"question": question})
 
 
-# In[ ]:
+
 
 
 result['answer']
 
 
-# In[ ]:
+
 
 
 question = "why are those prerequesites needed?"
 result = qa({"question": question})
 
 
-# In[ ]:
+
 
 
 result['answer']
@@ -139,7 +139,7 @@ result['answer']
 
 # # Create a chatbot that works on your documents
 
-# In[ ]:
+
 
 
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -155,7 +155,7 @@ from langchain.document_loaders import PyPDFLoader
 
 # The chatbot code has been updated a bit since filming. The GUI appearance also varies depending on the platform it is running on.
 
-# In[ ]:
+
 
 
 def load_db(file, chain_type, k):
@@ -182,7 +182,7 @@ def load_db(file, chain_type, k):
     return qa 
 
 
-# In[ ]:
+
 
 
 import panel as pn
@@ -264,7 +264,7 @@ class cbfs(param.Parameterized):
 
 # ### Create a chatbot
 
-# In[ ]:
+
 
 
 cb = cbfs()
@@ -307,9 +307,3 @@ dashboard = pn.Column(
 )
 dashboard
 
-
-#
-
-# ## Acknowledgments
-# 
-# Panel based chatbot inspired by Sophia Yang, [github](https://github.com/sophiamyang/tutorials-LangChain)
