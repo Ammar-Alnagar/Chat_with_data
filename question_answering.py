@@ -24,13 +24,13 @@ embedding = OpenAIEmbeddings()
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 
 
-# In[ ]:
+
 
 
 print(vectordb._collection.count())
 
 
-# In[ ]:
+
 
 
 question = "What are major topics for this class?"
@@ -61,7 +61,7 @@ Helpful Answer:"""
 QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
 
 
-# In[ ]:
+
 
 
 # Run chain
@@ -94,25 +94,17 @@ qa_chain_mr = RetrievalQA.from_chain_type(
 result = qa_chain_mr({"query": question})
 
 
-# In[ ]:
+
 
 
 result["result"]
 
 
-# If you wish to experiment on the `LangSmith platform` (previously known as LangChain Plus):
-# 
-#  * Go to [LangSmith](https://www.langchain.com/langsmith) and sign up
-#  * Create an API key from your account's settings
-#  * Use this API key in the code below   
-#  * uncomment the code  
-#  Note, the endpoint in the video differs from the one below. Use the one below.
-
-# In[ ]:
 
 
 
-# In[ ]:
+
+
 
 
 qa_chain_mr = RetrievalQA.from_chain_type(
